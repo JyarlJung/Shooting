@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://c5olwq7842kfq"]
+
+[ext_resource type="Shader" path="res://Materials/Shaders/tan_NORMAL.gdshader" id="1_hopiy"]
+[ext_resource type="Texture2D" uid="uid://ctikqh1l2pb1t" path="res://Image/sprite/amulet.png" id="2_40mqe"]
+[ext_resource type="Texture2D" uid="uid://cflllukslnpo" path="res://Image/sprite/amulet_outline.png" id="3_lvroq"]
+
+[sub_resource type="Gradient" id="Gradient_62ofa"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ndbwg"]
+gradient = SubResource("Gradient_62ofa")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_hopiy")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/rim_length = 8.0
+shader_parameter/unicolor = Color(1, 1, 1, 1)
+shader_parameter/rim = SubResource("GradientTexture1D_ndbwg")
+shader_parameter/albedo_texture = ExtResource("2_40mqe")
+shader_parameter/normal = ExtResource("3_lvroq")

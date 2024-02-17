@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cbttgl811r0ns"]
+
+[ext_resource type="Shader" path="res://Materials/Shaders/tan_add.gdshader" id="1_ge7yb"]
+
+[sub_resource type="Gradient" id="Gradient_0ep08"]
+offsets = PackedFloat32Array(0.0479042, 0.131737, 0.188623)
+colors = PackedColorArray(1, 1, 1, 1, 0.148936, 0.148936, 0.148936, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5cyeh"]
+gradient = SubResource("Gradient_0ep08")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ge7yb")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/rim_length = 8.0
+shader_parameter/unicolor = Color(1, 1, 1, 1)
+shader_parameter/rim = SubResource("GradientTexture1D_5cyeh")

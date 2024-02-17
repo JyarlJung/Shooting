@@ -1,0 +1,96 @@
+[gd_scene load_steps=10 format=3 uid="uid://c8oieokiypesj"]
+
+[ext_resource type="Shader" path="res://Materials/Shaders/tan.gdshader" id="1_ymooy"]
+[ext_resource type="Script" path="res://Script/Effect.cs" id="2_kfm58"]
+
+[sub_resource type="Gradient" id="Gradient_i4t25"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_k2lax"]
+gradient = SubResource("Gradient_i4t25")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x65jp"]
+render_priority = 0
+shader = ExtResource("1_ymooy")
+shader_parameter/albedo = Color(1, 0, 0, 0)
+shader_parameter/rim_length = 2.181
+shader_parameter/unicolor = Color(1, 0, 0, 1)
+shader_parameter/rim = SubResource("GradientTexture1D_k2lax")
+
+[sub_resource type="SphereMesh" id="SphereMesh_fsrn6"]
+radial_segments = 16
+rings = 8
+
+[sub_resource type="Animation" id="Animation_nx5op"]
+resource_name = "Effect_die"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 0.535885),
+"update": 0,
+"values": [Vector3(2, 2, 2), Vector3(0.1, 0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:transparency")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_rdnas"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:transparency")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wdcxr"]
+_data = {
+"Effect_die": SubResource("Animation_nx5op"),
+"RESET": SubResource("Animation_rdnas")
+}
+
+[node name="Charge" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_x65jp")
+mesh = SubResource("SphereMesh_fsrn6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Effect_die"
+libraries = {
+"": SubResource("AnimationLibrary_wdcxr")
+}
+script = ExtResource("2_kfm58")

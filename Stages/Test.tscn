@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0kwka37qjbt0"]
+
+[ext_resource type="Material" uid="uid://c32yhjcelhw20" path="res://Materials/TrailParticleMaterial.tres" id="1_awvxb"]
+[ext_resource type="Material" uid="uid://bnjwb6g7ki2aw" path="res://Materials/TrailMaterial.tres" id="2_nhvru"]
+[ext_resource type="Script" path="res://Script/Unused/MoveTest.cs" id="3_nyu3x"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_gxoal"]
+material = ExtResource("2_nhvru")
+
+[node name="Test" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+projection = 1
+fov = 50.0
+size = 6.4
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01432, -1.33129, 0)
+amount = 20
+lifetime = 20.0
+speed_scale = 60.0
+fixed_fps = 60
+visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
+process_material = ExtResource("1_awvxb")
+draw_pass_1 = SubResource("QuadMesh_gxoal")
+script = ExtResource("3_nyu3x")
+pos = Vector3(0.01, 0.01, 0)
+life = 1000

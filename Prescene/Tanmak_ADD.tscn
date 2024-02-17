@@ -1,0 +1,162 @@
+[gd_scene load_steps=13 format=3 uid="uid://bidot45qvokdu"]
+
+[ext_resource type="Script" path="res://Script/Object/SimpleTanmak.cs" id="1_ep3n0"]
+[ext_resource type="Script" path="res://Script/Manage/SimpleCollider.cs" id="2_afi5p"]
+[ext_resource type="Shader" path="res://Materials/Shaders/tan_add.gdshader" id="3_rrj4b"]
+
+[sub_resource type="Gradient" id="Gradient_0ep08"]
+offsets = PackedFloat32Array(0.0538922, 0.320359)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5cyeh"]
+gradient = SubResource("Gradient_0ep08")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t1fgw"]
+render_priority = 0
+shader = ExtResource("3_rrj4b")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/rim_length = 8.0
+shader_parameter/unicolor = Color(1, 1, 1, 1)
+shader_parameter/rim = SubResource("GradientTexture1D_5cyeh")
+
+[sub_resource type="SphereMesh" id="SphereMesh_nrddt"]
+radius = 0.06
+height = 0.12
+radial_segments = 10
+rings = 2
+
+[sub_resource type="Animation" id="Animation_t4an4"]
+resource_name = "Delete"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:layers")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [513]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ap026"]
+resource_name = "Idle"
+
+[sub_resource type="Animation" id="Animation_5yhkj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Mesh:layers")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_f21g6"]
+resource_name = "Start"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(4, 4, 4), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3ao85"]
+_data = {
+"Delete": SubResource("Animation_t4an4"),
+"Idle": SubResource("Animation_ap026"),
+"RESET": SubResource("Animation_5yhkj"),
+"Start": SubResource("Animation_f21g6")
+}
+
+[node name="Tanmak" type="Node3D" node_paths=PackedStringArray("anime", "graphic", "collider")]
+script = ExtResource("1_ep3n0")
+anime = NodePath("AnimationPlayer")
+graphic = NodePath("Mesh")
+lifetime = 700
+collider = NodePath("Collider")
+
+[node name="Collider" type="Node3D" parent="." node_paths=PackedStringArray("_rootNode")]
+script = ExtResource("2_afi5p")
+_points = [null]
+_layer = 2
+_collision = 41
+_rootNode = NodePath("..")
+Width = 0.03
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_t1fgw")
+instance_shader_parameters/color = Color(1, 0, 0, 1)
+mesh = SubResource("SphereMesh_nrddt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3ao85")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="AnimeFinished"]

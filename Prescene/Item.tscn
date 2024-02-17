@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://0sqfi5gpp6ql"]
+
+[ext_resource type="Script" path="res://Script/Object/Item.cs" id="1_mvwms"]
+[ext_resource type="Shader" path="res://Materials/Shaders/tan_add.gdshader" id="2_qnpy8"]
+
+[sub_resource type="Gradient" id="Gradient_0ep08"]
+offsets = PackedFloat32Array(0, 0.769461)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5cyeh"]
+gradient = SubResource("Gradient_0ep08")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o0nl3"]
+render_priority = 0
+shader = ExtResource("2_qnpy8")
+shader_parameter/albedo = Color(0.435294, 0.529412, 0.454902, 1)
+shader_parameter/rim_length = 6.0
+shader_parameter/unicolor = Color(0.305882, 0.352941, 0.317647, 1)
+shader_parameter/rim = SubResource("GradientTexture1D_5cyeh")
+
+[sub_resource type="SphereMesh" id="SphereMesh_cmqts"]
+radius = 0.03
+height = 0.06
+radial_segments = 4
+rings = 1
+
+[node name="Item" type="Node3D"]
+script = ExtResource("1_mvwms")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+sorting_offset = -1.0
+material_override = SubResource("ShaderMaterial_o0nl3")
+mesh = SubResource("SphereMesh_cmqts")

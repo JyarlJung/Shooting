@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://0iq8ji6hx2tr"]
+
+[ext_resource type="Shader" path="res://Materials/Shaders/bullet.gdshader" id="1_ow04g"]
+
+[sub_resource type="Gradient" id="Gradient_sm63m"]
+colors = PackedColorArray(1, 0, 0, 1, 0, 0, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eofpa"]
+gradient = SubResource("Gradient_sm63m")
+
+[sub_resource type="Gradient" id="Gradient_a4qkk"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5s7ej"]
+gradient = SubResource("Gradient_a4qkk")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ow04g")
+shader_parameter/rim_length = 8.0
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/rim = SubResource("GradientTexture1D_5s7ej")
+shader_parameter/albedo = SubResource("GradientTexture1D_eofpa")

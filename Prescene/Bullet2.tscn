@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://wuune77trk7e"]
+
+[ext_resource type="Script" path="res://Script/Object/Bullet.cs" id="1_af8ko"]
+[ext_resource type="Shader" path="res://Materials/Shaders/bullet.gdshader" id="2_wcga7"]
+[ext_resource type="ArrayMesh" uid="uid://dl5ie56401l0w" path="res://Mesh/Attack.res" id="4_7tu7j"]
+[ext_resource type="Script" path="res://Script/Manage/SimpleCollider.cs" id="4_gxh31"]
+
+[sub_resource type="Gradient" id="Gradient_sm63m"]
+colors = PackedColorArray(0.391052, 0.671875, 0.408604, 1, 0, 0.71875, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eofpa"]
+gradient = SubResource("Gradient_sm63m")
+
+[sub_resource type="Gradient" id="Gradient_a4qkk"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5s7ej"]
+gradient = SubResource("Gradient_a4qkk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g11w2"]
+render_priority = 0
+shader = ExtResource("2_wcga7")
+shader_parameter/rim_length = 8.0
+shader_parameter/color = Color(0.341176, 0.341176, 0.341176, 1)
+shader_parameter/rim = SubResource("GradientTexture1D_5s7ej")
+shader_parameter/albedo = SubResource("GradientTexture1D_eofpa")
+
+[node name="Bullet2" type="Node3D" node_paths=PackedStringArray("collider", "mesh")]
+script = ExtResource("1_af8ko")
+collider = NodePath("SimpleCollider")
+mesh = NodePath("MeshInstance3D")
+color = Color(0.639216, 0.811765, 0.807843, 1)
+rimColor = Color(0.313726, 0.329412, 0.560784, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+sorting_offset = -1.0
+material_override = SubResource("ShaderMaterial_g11w2")
+mesh = ExtResource("4_7tu7j")
+
+[node name="SimpleCollider" type="Node3D" parent="." node_paths=PackedStringArray("_rootNode")]
+script = ExtResource("4_gxh31")
+_points = [null]
+_layer = 4
+_collision = 16
+_rootNode = NodePath("..")
+Width = 0.15

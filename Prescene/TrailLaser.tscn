@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://eaff0nok5kv2"]
+
+[ext_resource type="Script" path="res://Script/Object/TrailLaser.cs" id="1_oujm6"]
+[ext_resource type="Shader" path="res://Materials/Shaders/tan_add.gdshader" id="2_d7d7s"]
+[ext_resource type="Script" path="res://Script/Trail.cs" id="2_u04oy"]
+[ext_resource type="Script" path="res://Script/Manage/SimpleCollider.cs" id="3_ujjdj"]
+
+[sub_resource type="Gradient" id="Gradient_0ep08"]
+offsets = PackedFloat32Array(0, 0.769461)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5cyeh"]
+gradient = SubResource("Gradient_0ep08")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rwkko"]
+render_priority = 0
+shader = ExtResource("2_d7d7s")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/rim_length = 8.0
+shader_parameter/unicolor = Color(1, 1, 1, 1)
+shader_parameter/rim = SubResource("GradientTexture1D_5cyeh")
+
+[sub_resource type="Curve" id="Curve_s6h2l"]
+_data = [Vector2(0, 0.366337), 0.0, 4.72852, 0, 0, Vector2(0.0874704, 0.70297), 2.27355, 2.27355, 0, 0, Vector2(0.241135, 0.930693), 0.507651, 0.507651, 0, 0, Vector2(0.813239, 0.782178), -1.14221, -1.14221, 0, 0, Vector2(1, 0.386139), -3.01021, 0.0, 0, 0]
+point_count = 5
+
+[node name="TrailLaser" type="Node3D" node_paths=PackedStringArray("trail", "graphic", "collider")]
+script = ExtResource("1_oujm6")
+trail = NodePath("Mesh")
+length = 35
+graphic = NodePath("Mesh")
+lifetime = 700
+collider = NodePath("Collider")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_rwkko")
+script = ExtResource("2_u04oy")
+line = SubResource("Curve_s6h2l")
+
+[node name="Collider" type="Node3D" parent="." node_paths=PackedStringArray("_rootNode")]
+script = ExtResource("3_ujjdj")
+_layer = 2
+_collision = 41
+_rootNode = NodePath("..")
+UseRect = true

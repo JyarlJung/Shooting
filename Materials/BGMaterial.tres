@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c7q2un15lj8wr"]
+
+[ext_resource type="Shader" path="res://Materials/Shaders/bg.gdshader" id="1_72nuc"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_nuye2"]
+viewport_path = NodePath("UI/SubViewportContainer/BGViewPort")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_72nuc")
+shader_parameter/view = SubResource("ViewportTexture_nuye2")

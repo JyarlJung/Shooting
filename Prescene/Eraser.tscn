@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6l566a260rj"]
+
+[ext_resource type="Script" path="res://Script/Eraser.cs" id="1_xjo80"]
+[ext_resource type="Script" path="res://Script/Manage/SimpleCollider.cs" id="1_xm1jy"]
+
+[node name="Eraser" type="Node3D" node_paths=PackedStringArray("collider")]
+script = ExtResource("1_xjo80")
+collider = NodePath("SimpleCollider")
+
+[node name="SimpleCollider" type="Node3D" parent="." node_paths=PackedStringArray("_rootNode")]
+script = ExtResource("1_xm1jy")
+_points = [null]
+_layer = 8
+_collision = 2
+_rootNode = NodePath("..")

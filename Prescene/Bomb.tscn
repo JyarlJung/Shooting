@@ -1,0 +1,544 @@
+[gd_scene load_steps=17 format=3 uid="uid://dxosnf1ltdyqc"]
+
+[ext_resource type="Script" path="res://Script/Bomb.cs" id="1_ytclg"]
+[ext_resource type="Script" path="res://Script/Manage/SimpleCollider.cs" id="2_sm3rm"]
+[ext_resource type="Material" uid="uid://bu3tptoid14af" path="res://Materials/LighteningMaterial.tres" id="3_5e08s"]
+[ext_resource type="Shader" path="res://Materials/Shaders/tan_add.gdshader" id="4_dswhd"]
+[ext_resource type="ArrayMesh" uid="uid://beylbfoovyhpl" path="res://Mesh/StarMesh.res" id="5_iwrg1"]
+[ext_resource type="Material" uid="uid://c1il6142so8b1" path="res://Materials/BlendSub.tres" id="6_ung25"]
+[ext_resource type="AudioStream" uid="uid://ct1cxcl0b0ctt" path="res://Sound/se_nep00.wav" id="7_i4sqb"]
+[ext_resource type="AudioStream" uid="uid://bc4u3km8qlmlm" path="res://Sound/se_slash.wav" id="8_ojyls"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ut1wu"]
+size = Vector2(2.5, 0.1)
+subdivide_width = 10
+subdivide_depth = 1
+center_offset = Vector3(0, 0.4, 0)
+
+[sub_resource type="Gradient" id="Gradient_0ep08"]
+offsets = PackedFloat32Array(0.317365, 0.526946)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5cyeh"]
+gradient = SubResource("Gradient_0ep08")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5n3n0"]
+render_priority = 0
+shader = ExtResource("4_dswhd")
+shader_parameter/albedo = Color(0.768627, 1, 0.87451, 1)
+shader_parameter/rim_length = 6.0
+shader_parameter/unicolor = Color(0.611765, 0.760784, 0.639216, 1)
+shader_parameter/rim = SubResource("GradientTexture1D_5cyeh")
+
+[sub_resource type="SphereMesh" id="SphereMesh_ep43n"]
+radius = 1.0
+radial_segments = 10
+rings = 3
+
+[sub_resource type="Animation" id="Animation_wx6wf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StarNodes/StarMesh:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.75, 0.75, 0.75)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StarNodes/StarMesh2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.75, 0.75, 0.75)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StarNodes/StarMesh3:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.75, 0.75, 0.75)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StarNodes/StarMesh4:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.75, 0.75, 0.75)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StarNodes/StarMesh5:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.75, 0.75, 0.75)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("LaserNodes/Laser:mesh:size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2.5, 0.1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("LaserNodes/Laser:mesh:center_offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.4, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StarNodes/StarMesh:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("StarNodes/StarMesh2:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("StarNodes/StarMesh3:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("StarNodes/StarMesh4:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("StarNodes/StarMesh5:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath(".:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("MeshInstance3D:scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("AudioStreamPlayer:playing")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("AudioStreamPlayer2:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ssbvq"]
+resource_name = "Start"
+length = 5.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StarNodes/StarMesh:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 4.65, 5),
+"transitions": PackedFloat32Array(0.435275, 1, 0.6, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1, 1, 1), Vector3(0.75, 0.75, 0.75), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StarNodes/StarMesh2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 4.65, 5),
+"transitions": PackedFloat32Array(0.435275, 1, 0.6, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1, 1, 1), Vector3(0.75, 0.75, 0.75), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StarNodes/StarMesh3:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 4.65, 5),
+"transitions": PackedFloat32Array(0.435275, 1, 0.6, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1, 1, 1), Vector3(0.75, 0.75, 0.75), Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StarNodes/StarMesh4:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 4.65, 5),
+"transitions": PackedFloat32Array(0.435275, 1, 0.6, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1, 1, 1), Vector3(0.75, 0.75, 0.75), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StarNodes/StarMesh5:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 4.65, 5),
+"transitions": PackedFloat32Array(0.435275, 1, 0.6, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1, 1, 1), Vector3(0.75, 0.75, 0.75), Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("LaserNodes/Laser:mesh:size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1, 4.65, 5),
+"transitions": PackedFloat32Array(0.420448, 1, 0.6, 1),
+"update": 0,
+"values": [Vector2(0.01, 0.1), Vector2(2.6, 0.1), Vector2(2.6, 0.1), Vector2(0.01, 0.1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("LaserNodes/Laser:mesh:center_offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1, 4.65, 5),
+"transitions": PackedFloat32Array(0.420448, 1, 0.6, 1),
+"update": 0,
+"values": [Vector3(1.2, 0.4, 0), Vector3(0, 0.4, 0), Vector3(0, 0.4, 0), Vector3(1.2, 0.4, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 37.6991)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("StarNodes/StarMesh:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 4.65, 5),
+"transitions": PackedFloat32Array(1, 0.6, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 62.8319), Vector3(0, 0, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("StarNodes/StarMesh2:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 4.65, 5),
+"transitions": PackedFloat32Array(1, 0.6, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 62.8319), Vector3(0, 0, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("StarNodes/StarMesh3:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 4.65, 5),
+"transitions": PackedFloat32Array(1, 0.6, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 62.8319), Vector3(0, 0, 0)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("StarNodes/StarMesh4:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 4.65, 5),
+"transitions": PackedFloat32Array(1, 0.6, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 62.8319), Vector3(0, 0, 0)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("StarNodes/StarMesh5:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 4.65, 5),
+"transitions": PackedFloat32Array(1, 0.6, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 62.8319), Vector3(0, 0, 0)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath(".:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("MeshInstance3D:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 0.35, 1.5, 4.75, 4.8),
+"transitions": PackedFloat32Array(1, 2, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(8, 8, 8), Vector3(8, 8, 8), Vector3(0, 0, 0)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("AudioStreamPlayer:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("AudioStreamPlayer2:playing")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_smypt"]
+_data = {
+"RESET": SubResource("Animation_wx6wf"),
+"Start": SubResource("Animation_ssbvq")
+}
+
+[node name="Bomb" type="Node3D" node_paths=PackedStringArray("anime", "collider")]
+visible = false
+script = ExtResource("1_ytclg")
+anime = NodePath("AnimationPlayer")
+collider = NodePath("Collider")
+
+[node name="Collider" type="Node3D" parent="." node_paths=PackedStringArray("_rootNode")]
+script = ExtResource("2_sm3rm")
+_points = [Vector3(1.2, 0.4, 0), Vector3(-1.2, 0.4, 0), Vector3(0.74, -1.02, 0), Vector3(0, 1.3, 0), Vector3(-0.74, -1.02, 0), Vector3(1.2, 0.4, 0)]
+_layer = 8
+_collision = 16
+_rootNode = NodePath("..")
+Width = 0.15
+
+[node name="LaserNodes" type="Node3D" parent="."]
+
+[node name="Laser" type="MeshInstance3D" parent="LaserNodes"]
+material_override = ExtResource("3_5e08s")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_ut1wu")
+skeleton = NodePath("../..")
+
+[node name="Laser2" type="MeshInstance3D" parent="LaserNodes"]
+transform = Transform3D(-0.809017, -0.587785, 0, 0.587785, -0.809017, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("3_5e08s")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_ut1wu")
+skeleton = NodePath("../..")
+
+[node name="Laser3" type="MeshInstance3D" parent="LaserNodes"]
+transform = Transform3D(0.309017, 0.951056, 0, -0.951056, 0.309017, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("3_5e08s")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_ut1wu")
+skeleton = NodePath("../..")
+
+[node name="Laser4" type="MeshInstance3D" parent="LaserNodes"]
+transform = Transform3D(0.309017, -0.951056, 0, 0.951056, 0.309017, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("3_5e08s")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_ut1wu")
+skeleton = NodePath("../..")
+
+[node name="Laser5" type="MeshInstance3D" parent="LaserNodes"]
+transform = Transform3D(-0.809017, 0.587785, 0, -0.587785, -0.809017, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("3_5e08s")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_ut1wu")
+skeleton = NodePath("../..")
+
+[node name="StarNodes" type="Node3D" parent="."]
+
+[node name="StarMesh" type="MeshInstance3D" parent="StarNodes"]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 1.2, 0.4, 0)
+material_override = SubResource("ShaderMaterial_5n3n0")
+mesh = ExtResource("5_iwrg1")
+skeleton = NodePath("../..")
+
+[node name="StarMesh2" type="MeshInstance3D" parent="StarNodes"]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -1.2, 0.4, 0)
+material_override = SubResource("ShaderMaterial_5n3n0")
+mesh = ExtResource("5_iwrg1")
+skeleton = NodePath("../..")
+
+[node name="StarMesh3" type="MeshInstance3D" parent="StarNodes"]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0.74, -1.02, 0)
+material_override = SubResource("ShaderMaterial_5n3n0")
+mesh = ExtResource("5_iwrg1")
+skeleton = NodePath("../..")
+
+[node name="StarMesh4" type="MeshInstance3D" parent="StarNodes"]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 1.3, 0)
+material_override = SubResource("ShaderMaterial_5n3n0")
+mesh = ExtResource("5_iwrg1")
+skeleton = NodePath("../..")
+
+[node name="StarMesh5" type="MeshInstance3D" parent="StarNodes"]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -0.74, -1.02, 0)
+material_override = SubResource("ShaderMaterial_5n3n0")
+mesh = ExtResource("5_iwrg1")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -2.745)
+material_override = ExtResource("6_ung25")
+mesh = SubResource("SphereMesh_ep43n")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_smypt")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_i4sqb")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ojyls")

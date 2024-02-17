@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://bju5fd4nbw66a"]
+
+[ext_resource type="Shader" path="res://Materials/Shaders/spellbg.gdshader" id="1_kn76m"]
+[ext_resource type="Texture2D" uid="uid://2n4ynftelvxj" path="res://Image/background/cdbg07b.png" id="2_5kxmj"]
+
+[sub_resource type="Gradient" id="Gradient_s4vei"]
+offsets = PackedFloat32Array(0, 0.333, 0.666, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_u41de"]
+gradient = SubResource("Gradient_s4vei")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_kn76m")
+shader_parameter/color = SubResource("GradientTexture1D_u41de")
+shader_parameter/tex = ExtResource("2_5kxmj")

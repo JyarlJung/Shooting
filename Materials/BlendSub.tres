@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://c1il6142so8b1"]
+
+[ext_resource type="Shader" path="res://Materials/Shaders/tan_sub.gdshader" id="1_eebe6"]
+
+[sub_resource type="Gradient" id="Gradient_ae7ls"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2r0qu"]
+gradient = SubResource("Gradient_ae7ls")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_eebe6")
+shader_parameter/albedo = Color(1, 0.94902, 0.94902, 1)
+shader_parameter/rim_length = 16.0
+shader_parameter/unicolor = Color(1, 1, 1, 1)
+shader_parameter/rim = SubResource("GradientTexture1D_2r0qu")

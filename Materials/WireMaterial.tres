@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dj7exh6ju6hrl"]
+
+[ext_resource type="Shader" uid="uid://corkhsy2bnwyo" path="res://Materials/Shaders/wire.tres" id="1_e22hg"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_e22hg")

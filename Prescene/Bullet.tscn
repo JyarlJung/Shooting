@@ -1,0 +1,99 @@
+[gd_scene load_steps=15 format=3 uid="uid://6yw568glhdq6"]
+
+[ext_resource type="Script" path="res://Script/Object/Bullet.cs" id="1_fw7v3"]
+[ext_resource type="Shader" path="res://Materials/Shaders/bullet.gdshader" id="2_uqafw"]
+[ext_resource type="Script" path="res://Script/Manage/SimpleCollider.cs" id="3_bhsdw"]
+[ext_resource type="Texture2D" uid="uid://bdrmv2tfy0k6g" path="res://Image/sprite/shot.png" id="3_eyvb4"]
+[ext_resource type="Script" path="res://Script/SimpleAnimator.cs" id="4_dlyu1"]
+
+[sub_resource type="Gradient" id="Gradient_sm63m"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.916168)
+colors = PackedColorArray(0.8, 0.4, 0.4, 1, 0.8, 0.8, 0.4, 1, 0.4, 0.8, 0.453333, 1, 0.4, 0.8, 0.8, 1, 0.4, 0.4, 0.8, 1, 0.8, 0.4, 0.8, 1, 0.796875, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eofpa"]
+gradient = SubResource("Gradient_sm63m")
+
+[sub_resource type="Gradient" id="Gradient_a4qkk"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5s7ej"]
+gradient = SubResource("Gradient_a4qkk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nvxmk"]
+render_priority = 0
+shader = ExtResource("2_uqafw")
+shader_parameter/rim_length = 8.0
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/rim = SubResource("GradientTexture1D_5s7ej")
+shader_parameter/albedo = SubResource("GradientTexture1D_eofpa")
+shader_parameter/albedo_texture = ExtResource("3_eyvb4")
+
+[sub_resource type="QuadMesh" id="QuadMesh_o7j3v"]
+size = Vector2(0.16, 0.16)
+
+[sub_resource type="Animation" id="Animation_dpt4n"]
+resource_name = "Idle"
+length = 0.26667
+loop_mode = 1
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.785398), Vector3(0, 0, 1.5708), Vector3(0, 0, 2.35619), Vector3(0, 0, 3.14159), Vector3(0, 0, 3.92699), Vector3(0, 0, 4.71239), Vector3(0, 0, 5.49779)]
+}
+
+[sub_resource type="Animation" id="Animation_1g6e7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i5o3o"]
+_data = {
+"Idle": SubResource("Animation_dpt4n"),
+"RESET": SubResource("Animation_1g6e7")
+}
+
+[node name="Bullet" type="Node3D" node_paths=PackedStringArray("collider", "mesh")]
+script = ExtResource("1_fw7v3")
+collider = NodePath("Collider")
+mesh = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+sorting_offset = -1.0
+material_override = SubResource("ShaderMaterial_nvxmk")
+mesh = SubResource("QuadMesh_o7j3v")
+
+[node name="Collider" type="Node3D" parent="." node_paths=PackedStringArray("_rootNode")]
+script = ExtResource("3_bhsdw")
+_points = [null]
+_layer = 4
+_collision = 16
+_rootNode = NodePath("..")
+Width = 0.15
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+libraries = {
+"": SubResource("AnimationLibrary_i5o3o")
+}
+script = ExtResource("4_dlyu1")
+startAnime = "Idle"

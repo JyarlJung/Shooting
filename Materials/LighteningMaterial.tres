@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bu3tptoid14af"]
+
+[ext_resource type="Shader" uid="uid://mn26agwr7wv0" path="res://Materials/Shaders/lightening.tres" id="1_7n2os"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_7n2os")

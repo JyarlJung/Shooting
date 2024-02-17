@@ -1,0 +1,126 @@
+[gd_scene load_steps=10 format=3 uid="uid://bwrtbbnaw2ebb"]
+
+[ext_resource type="Texture2D" uid="uid://cca6500fmennx" path="res://Image/sprite/frog.png" id="2_bnps8"]
+[ext_resource type="Script" path="res://Script/SimpleAnimator.cs" id="2_sters"]
+
+[sub_resource type="Animation" id="Animation_ha3bx"]
+resource_name = "Idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(2, 0.5, 2, 0.5, 1),
+"update": 0,
+"values": [Vector3(0.9, 0.9, 0.9), Vector3(1.1, 1.1, 1.1), Vector3(1.2, 1.2, 1.2), Vector3(1.1, 1.1, 1.1), Vector3(0.9, 0.9, 0.9)]
+}
+
+[sub_resource type="Animation" id="Animation_waa8m"]
+resource_name = "Pop"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 1.5),
+"transitions": PackedFloat32Array(2, 2, 0.5, 1),
+"update": 0,
+"values": [Vector3(0.9, 0.9, 0.9), Vector3(1.5, 1.5, 1.5), Vector3(1.1, 1.1, 1.1), Vector3(0.9, 0.9, 0.9)]
+}
+
+[sub_resource type="Animation" id="Animation_nivok"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_twgby"]
+resource_name = "Start"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.5, 2),
+"transitions": PackedFloat32Array(0.5, 2, 0.5, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.2, 1.2, 1.2), Vector3(1.1, 1.1, 1.1), Vector3(0.9, 0.9, 0.9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_npu67"]
+_data = {
+"Idle": SubResource("Animation_ha3bx"),
+"Pop": SubResource("Animation_waa8m"),
+"RESET": SubResource("Animation_nivok"),
+"Start": SubResource("Animation_twgby")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0st04"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("2_bnps8")
+
+[sub_resource type="QuadMesh" id="QuadMesh_b8ei1"]
+size = Vector2(2.56, 2.56)
+
+[node name="MagicCircle" type="Node3D"]
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_npu67")
+}
+script = ExtResource("2_sters")
+tailAnime = "Idle"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 513
+sorting_offset = -2.0
+material_override = SubResource("StandardMaterial3D_0st04")
+mesh = SubResource("QuadMesh_b8ei1")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="AnimationPlayer" method="Finished"]
